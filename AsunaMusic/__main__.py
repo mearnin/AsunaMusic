@@ -1,6 +1,6 @@
 import os
 from pyrogram import Client, idle
-from config import API_ID, API_HASH, BOT_TOKEN, SESSION_STRING
+from config import API_ID, API_HASH, BOT_TOKEN, SESSION_NAME
 
 USER = Client(
     SESSION_NAME,
