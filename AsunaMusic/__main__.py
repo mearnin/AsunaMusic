@@ -19,10 +19,10 @@ if not os.path.isdir("./downloads"):
     os.makedirs("./downloads")
 
 Bot.start()
-User.start()
+USER.start()
 print("\n[INFO] - STARTED VIDEO PLAYER BOT, JOIN @ASMSAFONE !")
 
 idle()
 Bot.stop()
-User.stop()
+USER.stop()
 print("\n[INFO] - STOPPED VIDEO PLAYER BOT, JOIN @ASMSAFONE !")
