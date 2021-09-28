@@ -3,7 +3,7 @@ from pyrogram import Client, idle
 from config import API_ID, API_HASH, BOT_TOKEN, SESSION_STRING
 
 USER = Client(
-    SESSION_STRING,
+    SESSION_NAME,
     API_ID,
     API_HASH
 )
