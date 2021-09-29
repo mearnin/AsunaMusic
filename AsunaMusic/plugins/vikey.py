@@ -338,7 +338,9 @@ async def play_command(client, message: Message):
                             ),
                     )
                     os.remove("final.png")
-                    return await msg.delete()
+                    await msg.delete()
+                except Exception as e:
+                    print(e)
     
     
      elif 'https' in vid:
@@ -401,7 +403,9 @@ async def play_command(client, message: Message):
             ),
         )
             os.remove("final.png")
-            return await msg.delete()
+            await msg.delete()
+        except Exception as e:
+            print(e)
     elif media.video or media.document:
         if round(audio.duration / 60) > DURATION_LIMIT:
             await msg.edit(
@@ -418,13 +422,14 @@ async def play_command(client, message: Message):
         requested_by = message.from_user.first_name
         await generate_cover(requested_by, title, views, duration, thumbnail)
         vid_call = VIDEO_CALL.get(chatid)
-            if vid_call:
-                await VIDEO_CALL[chatid].stop()
-                VIDEO_CALL.pop(chatid)
-                await sleep(3)
-                await message.reply_photo(
+        if vid_call:
+            await VIDEO_CALL[chatid].stop()
+            VIDEO_CALL.pop(chatid)
+            await sleep(3)
+            await message.reply_photo(
                   photo="final.png",
                   reply_markup="keyboard",
                   caption="**playing the locally added file",
                   )
+            await message.delete()
     
