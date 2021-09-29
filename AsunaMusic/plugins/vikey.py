@@ -93,7 +93,7 @@ async def generate_cover(requested_by, title, views, duration, thumbnail):
     os.remove("background.png")
     
 
-Client.on_callback_query(filters.regex("pause_callback"))
+@Client.on_callback_query(filters.regex("pause_callback"))
 async def pause_callbacc(client, CallbackQuery):
     chat_id = CallbackQuery.message.chat.id
     if chat_id in AUDIO_CALL:
@@ -341,8 +341,8 @@ async def play_command(client, message: Message):
                     return await msg.delete()
     
     
-        elif 'https' in vid:
-            await msg.edit("**Processing**")
+     elif 'https' in vid:
+        await msg.edit("**Processing**")
         try:
             results = YoutubeSearch(vid, max_results=1).to_dict()
             url = f"https://youtube.com{results[0]['url_suffix']}"
