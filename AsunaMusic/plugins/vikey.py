@@ -13,16 +13,16 @@ from youtube_dl import YoutubeDL
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from pytgcalls import GroupCallFactory
-from Videoplay.config import BOT_NAME
+from config import BOT_NAME
 from config import AUDIO_CALL, VIDEO_CALL
 from youtube_search import YoutubeSearch
-from Videoplay.helpers.decorators import authorized_users_only
-from Videoplay.bot import client as USER
+from helpers.decorators import authorized_users_only
+from AsunaMusic import USER
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
-from Videoplay.helpers.admins import get_admins
-from Videoplay.config import que
-from Videoplay.helpers.queues import queues
-from Videoplay.helpers.filters import command, other_filters
+from helpers.admins import get_admins
+from config import que
+from helpers.queues import queues
+from helpers.filters import command, other_filters
 from PIL import Image, ImageDraw, ImageFont
 from pyrogram.errors import UserAlreadyParticipant
 from Python_ARQ import ARQ
