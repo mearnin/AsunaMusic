@@ -17,7 +17,6 @@ from config import BOT_NAME
 from config import AUDIO_CALL, VIDEO_CALL
 from youtube_search import YoutubeSearch
 from helpers.decorators import authorized_users_only
-from AsunaMusic import USER
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from helpers.admins import get_admins
 from config import que
