@@ -343,69 +343,69 @@ async def play_command(client, message: Message):
                     print(e)
     
     
-     elif 'https' in vid:
-        await msg.edit("**Processing**")
-        try:
-            results = YoutubeSearch(vid, max_results=1).to_dict()
-            url = f"https://youtube.com{results[0]['url_suffix']}"
+         elif 'https' in vid:
+             await msg.edit("**Processing**")
+             try:
+                 results = YoutubeSearch(vid, max_results=1).to_dict()
+                 url = f"https://youtube.com{results[0]['url_suffix']}"
             # print(results)
-            title = results[0]["title"][:40]
-            thumbnail = results[0]["thumbnails"][0]
-            thumb_name = f"thumb{title}.jpg"
-            thumb = requests.get(thumbnail, allow_redirects=True)
-            open(thumb_name, "wb").write(thumb.content)
-            duration = results[0]["duration"]
-            results[0]["url_suffix"]
-            views = results[0]["views"]
+                 title = results[0]["title"][:40]
+                 thumbnail = results[0]["thumbnails"][0]
+                 thumb_name = f"thumb{title}.jpg"
+                 thumb = requests.get(thumbnail, allow_redirects=True)
+                 open(thumb_name, "wb").write(thumb.content)
+                 duration = results[0]["duration"]
+                 results[0]["url_suffix"]
+                 views = results[0]["views"]
 
-        except Exception as e:
-            await msg.edit(
-                "Song not found.Try another song or maybe spell it properly."
-            )
-            print(str(e))
-            return
-        try:
-            secmul, dur, dur_arr = 1, 0, duration.split(":")
-            for i in range(len(dur_arr) - 1, -1, -1):
-                dur += int(dur_arr[i]) * secmul
-                secmul *= 60
-            if (dur / 60) > DURATION_LIMIT:
-                await msg.edit(
-                    f"❌ Videos longer than {DURATION_LIMIT} minutes aren't allowed to play!"
-                )
-                return
-        except:
-            pass
-        requested_by = message.from_user.first_name
-        await generate_cover(requested_by, title, views, duration, thumbnail)
-        vid_call = VIDEO_CALL.get(chatid)
-        if vid_call:
-        await VIDEO_CALL[chatid].stop()
-        VIDEO_CALL.pop(chatid)
-        await sleep(3)
-        try:
-            chat_id = get_chat_id(message.chat)
-            que[chat_id] = []
-            qeue = que.get(chat_id)
-            s_name = title
-            r_by = message.from_user
-            loc = url
-            appendable = [s_name, r_by, loc]
-            qeue.append(appendable)
-            await sleep(2)
-            await group_call.join(chatid)
-            await group_call.start_video(url, with_audio=True, repeat=False)
-            await message.reply_photo(
-            photo="final.png",
-            reply_markup=keyboard,
-            caption="▶️ **Playing</b> here the song requested by {} via Youtube Music 😎**".format(
-            message.from_user.mention()
-            ),
-        )
-            os.remove("final.png")
-            await msg.delete()
-        except Exception as e:
-            print(e)
+             except Exception as e:
+                 await msg.edit(
+                     "Song not found.Try another song or maybe spell it properly."
+                 )
+                 print(str(e))
+                 return
+             try:
+                 secmul, dur, dur_arr = 1, 0, duration.split(":")
+                 for i in range(len(dur_arr) - 1, -1, -1):
+                     dur += int(dur_arr[i]) * secmul
+                     secmul *= 60
+                 if (dur / 60) > DURATION_LIMIT:
+                     await msg.edit(
+                          f"❌ Videos longer than {DURATION_LIMIT} minutes aren't allowed to play!"
+                     )
+                     return
+             except:
+                 pass
+             requested_by = message.from_user.first_name
+             await generate_cover(requested_by, title, views, duration, thumbnail)
+             vid_call = VIDEO_CALL.get(chatid)
+             if vid_call:
+                 await VIDEO_CALL[chatid].stop()
+                 VIDEO_CALL.pop(chatid)
+                 await sleep(3)
+             try:
+                 chat_id = get_chat_id(message.chat)
+                 que[chat_id] = []
+                 qeue = que.get(chat_id)
+                 s_name = title
+                 r_by = message.from_user
+                 loc = url
+                 appendable = [s_name, r_by, loc]
+                 qeue.append(appendable)
+                 await sleep(2)
+                 await group_call.join(chatid)
+                 await group_call.start_video(url, with_audio=True, repeat=False)
+                 await message.reply_photo(
+                     photo="final.png",
+                     reply_markup=keyboard,
+                     caption="▶️ **Playing</b> here the song requested by {} via Youtube Music 😎**".format(
+                         message.from_user.mention()
+                     ),
+                 )
+                 os.remove("final.png")
+                 await msg.delete()
+             except Exception as e:
+                 print(str(e))
     elif media.video or media.document:
         if round(audio.duration / 60) > DURATION_LIMIT:
             await msg.edit(
