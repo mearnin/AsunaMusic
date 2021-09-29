@@ -3,8 +3,8 @@ from typing import Callable
 from pyrogram import Client
 from pyrogram.types import Message
 
-from Videoplay.config import SUDO_USERS
-from Videoplay.helpers.admins import get_admins
+from config import SUDO_USERS
+from helpers.admins import get_admins
 
 
 def errors(func: Callable) -> Callable:
