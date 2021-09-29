@@ -1,9 +1,9 @@
 import os
 from pyrogram import Client, idle
-from config import API_ID, API_HASH, BOT_TOKEN, SESSION_STRING
+from config import API_ID, API_HASH, BOT_TOKEN, SESSION_NAME
 
-User = Client(
-    SESSION_STRING,
+USER = Client(
+    SESSION_NAME,
     API_ID,
     API_HASH
 )
@@ -13,16 +13,16 @@ Bot = Client(
     API_ID,
     API_HASH,
     bot_token=BOT_TOKEN,
-    plugins=dict(root="plugins"),
+    plugins=dict(root="AsunaMusic/plugins"),
 )
 if not os.path.isdir("./downloads"):
     os.makedirs("./downloads")
 
 Bot.start()
-User.start()
+USER.start()
 print("\n[INFO] - STARTED VIDEO PLAYER BOT, JOIN @ASMSAFONE !")
 
 idle()
 Bot.stop()
-User.stop()
+USER.stop()
 print("\n[INFO] - STOPPED VIDEO PLAYER BOT, JOIN @ASMSAFONE !")
